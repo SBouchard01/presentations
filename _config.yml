@@ -1,0 +1,16 @@
+title: Reveal.js presentations
+author: Simon Bouchard
+description: >- # this means to ignore newlines until "baseurl:"
+  Reveal presentations hosted on GithHub pages
+baseurl: "" # the subpath of your site, e.g. /blog
+
+# Exclude directories and/or files from the conversion
+exclude:
+  - Gemfile*
+  - LICENSE
+  - README.md
+
+
+markdown: kramdown
+highlighter: rouge
+markdown_ext: ignoreme

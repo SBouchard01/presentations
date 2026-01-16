@@ -1,0 +1,20 @@
+--- 
+layout: default
+title: Reveal.js presentations
+---
+
+{% assign presentations = site.data.presentations | sort: "date" | reverse %}
+
+{% for presentation in presentations %}
+
+    <section>
+        <h2><a href="{{ presentation.url }}">{{ presentation.title }}</a></h2>
+        <p>{{ presentation.description }}</p>
+        <p class="is-size-7"><em>Date: {{ presentation.date }}</em></p>
+    </section>
+
+    {% unless forloop.last %}
+    <hr>
+    {% endunless %}
+
+{% endfor %}
