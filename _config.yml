@@ -2,7 +2,20 @@ title: Reveal.js presentations
 author: Simon Bouchard
 description: >- # this means to ignore newlines until "baseurl:"
   Reveal presentations hosted on GithHub pages
-baseurl: "" # the subpath of your site, e.g. /blog
+
+# Default reveal.js options
+
+reveal_path: reveal.js/
+
+reveal_options: 
+  width: 100%
+  height: 100%
+  slideNumber: false
+  transition: 'slide'
+  margin: 0.3
+
+mermaid_diagrams: true
+mermaid_theme: dark # See https://mermaid-js.github.io/mermaid/#/theming?id=deployable-themes
 
 # Exclude directories and/or files from the conversion
 exclude:
