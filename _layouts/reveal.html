@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    {% if page.title %}<title>{{ page.title }}</title>{% endif %}
+    {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
+    {% if page.author %}<meta name="author" content="{{ page.author }}">{% endif %}
+
+    <meta name="mobile-web-app-capable" content="yes" />
+	  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    {% assign reveal_path = page.reveal_path | default: site.reveal_path %}
+    {% assign reveal_theme = page.reveal_theme | default: site.reveal_theme %}
+    {% assign mermaid_diagrams = page.mermaid_diagrams | default: site.mermaid_diagrams %}
+
+    <link rel="stylesheet" href="{{ reveal_path }}dist/reveal.css">
+	  <link rel="stylesheet" href="{{ reveal_theme }}" id="theme">
+
+    {% if page.extra_css %}
+      {% for css_file in page.extra_css %}
+        <link rel="stylesheet" href="{{ css_file }}">
+      {% endfor %}
+    {% endif %}
+
+    {% if mermaid_diagrams %}
+      <link rel="stylesheet" href="/assets/css/mermaid.css">
+    {% endif %}
+
+    <style>
+      .copy-button {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        padding: 0.25rem 0.5rem;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 0.8rem;
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+      pre:hover .copy-button {
+        opacity: 1;
+      }
+      .copy-button:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+      .copy-button.copied {
+        background: rgba(0, 255, 0, 0.2);
+      }
+	</style>
+
+    <!-- For syntax highlighting -->
+    {% if page.highlight_style_sheet %}
+      {% assign highlight_style_sheet = page.highlight_style_sheet %}
+    {% else %}
+      {% capture highlight_style_sheet %}{{ reveal_path }}plugin/highlight/zenburn.css {% endcapture %}
+    {% endif %}
+    <link rel="stylesheet" href="{{ highlight_style_sheet }}">
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+      document.write( '<link rel="stylesheet" href="{{ reveal_path }}css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.scss" type="text/css" media="print">' );
+    </script>
+  </head>
+
+  <body>
+    {{ content }}
+
+
+    <script src="{{ reveal_path }}dist/reveal.js"></script>
+    <script src="{{ reveal_path }}plugin/notes/notes.js"></script>
+		<script src="{{ reveal_path }}plugin/markdown/markdown.js"></script>
+		<script src="{{ reveal_path }}plugin/highlight/highlight.js"></script>
+
+    {% assign reveal_transition = page.reveal_transition | default: site.reveal_transition | default: 'slide' %}
+    <script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+        hash: true,
+        width: "200%",
+        height: "200%",
+        slideNumber: false,
+        transition: 'slide',
+        margin: 0.3,
+        
+				transition: '{{ reveal_transition }}', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+
+  </body>
+</html>
