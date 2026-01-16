@@ -5,7 +5,8 @@ description: >- # this means to ignore newlines until "baseurl:"
 
 # Default reveal.js options
 
-reveal_path: reveal.js/
+reveal_path: /reveal.js/
+reveal_theme: /reveal.js/dist/theme/night.css
 
 reveal_options: 
   width: 100%
