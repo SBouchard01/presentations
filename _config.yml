@@ -12,11 +12,21 @@ reveal_options:
   width: 100%
   height: 100%
   slideNumber: false
+  progress: true
+  history: true
+  center: true
+  hash: true
   transition: 'slide'
   margin: 0.3
+  controls: true
+  pdfSeparateFragments: false
 
-mermaid_diagrams: true
+reveal_notes_server: false # Has to be false by default, otherwise True will override page settings
+
+mermaid_diagrams: false 
 mermaid_theme: dark # See https://mermaid-js.github.io/mermaid/#/theming?id=deployable-themes
+
+
 
 # Exclude directories and/or files from the conversion
 exclude:

@@ -1,7 +1,7 @@
-div.diagram-display {
+div.mermaid {
     position: relative;
 }
-div.diagram-display svg {
+div.mermaid svg {
     position: absolute;
     left: 0;
     top: 0;
