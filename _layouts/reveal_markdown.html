@@ -1,0 +1,101 @@
+---
+layout: reveal
+---
+
+<div class="reveal">
+    <div class="slides">
+        <section data-markdown data-separator="^\r?\n---\r?\n$" data-separator-vertical="^\r?\n--\r?\n$" data-separator-notes="^Note:">
+            <script type="text/template">
+{% comment %} 
+    Spacing in the following code is important to allow the parsing to be correctly interpreted 
+{% endcomment %}{% 
+                assign lines = content | newline_to_br | strip_newlines | split: "<br />" 
+%}{% 
+                assign mermaid_theme = page.mermaid_theme | default: site.mermaid_theme | default: 'dark' 
+%}{%            
+                assign mermaid_span = '<div class="mermaid" style="height: 300px;"><pre>%%{init: {&#39;theme&#39;:&#39;' | append: mermaid_theme | append: '&#39;}}%%' 
+%}{% 
+                for line in lines 
+%}{% 
+                    assign processed_line = line
+                        | replace:'<fragment/>','<!-- .element: class="fragment" -->'
+                        | replace:'<background>','<!-- .slide: data-background="'
+                        | replace:'</background>','" -->'
+                        | replace:'<backgroundimage>','<!-- .slide: data-background="'
+                        | replace:'</backgroundimage>','" --> '
+                        | replace:'<backgroundimageopacity>','<!-- .slide: data-background-opacity="'
+                        | replace:'</backgroundimageopacity>','" -->'
+                        | replace:'<mermaid>',mermaid_span
+                        | replace:'</mermaid>','</pre></div>'
+%}{% 
+                    assign first_char = line | strip | slice: 0,1 
+%}{% 
+                    if first_char == '+' 
+%}{% 
+                        assign processed_line = processed_line | replace_first: '+','+ <!-- .element: class="fragment" -->' 
+%}{% 
+                    endif 
+                    %}{{ processed_line }}{% comment %}Following line break is important{% endcomment %}
+{% 
+                endfor 
+%}
+            </script>
+        </section>
+    </div>
+</div>
+
+
+{% assign reveal_path = page.reveal_path | default: site.reveal_path %}
+<script src="{{ reveal_path }}dist/reveal.js"></script>
+<script src="{{ reveal_path }}plugin/math/math.js"></script>
+<script src="{{ reveal_path }}plugin/notes/notes.js"></script>
+<script src="{{ reveal_path }}plugin/markdown/markdown.js"></script>
+<script src="{{ reveal_path }}plugin/highlight/highlight.js"></script>
+
+{% assign mermaid_diagrams = page.mermaid_diagrams | default: site.mermaid_diagrams %}
+{{ page.mermaid_diagrams }}
+{% if mermaid_diagrams %}
+<script src="https://cdn.jsdelivr.net/npm/reveal.js-mermaid-plugin@11.6.0/plugin/mermaid/mermaid.js"></script>
+{% endif %}
+
+{% comment %}
+    Bugged as I did not use npm to install reveal.js
+{% endcomment %}
+{% assign reveal_notes_server = page.reveal_notes_server | default: site.reveal_notes_server %}
+{% if reveal_notes_server %}
+<script src="/socket.io/socket.io.js"></script>
+<script src="/assets/js/notes-server/client.js"></script>
+{% endif %}
+
+{% for dependency in page.reveal_dependencies %}
+{{ dependency }}
+{% endfor %}
+
+{% assign site_reveal_options = site.reveal_options | default: "{}" | jsonify %}
+{% assign page_reveal_options = page.reveal_options | default: "{}" | jsonify %}
+<script>
+    // Merge site-wide and page-specific Reveal.js options
+    var site_reveal_options = {{ site_reveal_options }};
+    var page_reveal_options = {{ page_reveal_options }};
+    var reveal_options = Object.assign({}, site_reveal_options, page_reveal_options);
+    console.log("Reveal.js options:", reveal_options);
+
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+        ...reveal_options,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [ 
+            RevealMarkdown, 
+            RevealHighlight, 
+            RevealNotes, 
+            RevealMath.KaTeX, 
+            {% if mermaid_diagrams %}
+            RevealMermaid,
+            {% endif %}
+        ]
+    });
+</script>
+

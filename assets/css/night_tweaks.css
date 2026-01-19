@@ -1,0 +1,67 @@
+:root {
+  --r-main-font-size: 35px;
+  --r-heading1-size: 2.0em;
+  --r-heading2-size: 1.5em;
+  --r-heading3-size: 1.0em;
+  --r-heading4-size: 5.5em;
+}
+
+.reveal h5 {
+  font-size: var(--r-heading2-size);
+  color: #616eb5;
+}
+
+.reveal em {
+  color: #cd61bd;
+}
+
+.reveal blockquote {
+  display: block !important;
+  text-align: left !important;
+  all: unset;
+}
+
+.reveal pre {
+  font-size: 0.8em;
+  /* background-color: #1e1e1e; */
+  /* box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3); */
+}
+
+.reveal code {
+  color: rgb(104, 188, 74);
+  display: inline-block;
+  background-color: #444;
+  border-radius: 10px;
+  padding: 2px;
+  tab-size: 2;
+}
+
+.reveal .progress span {
+  transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+}
+
+/* Copy button for code blocks */
+
+.copy-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.8rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+pre:hover .copy-button {
+  opacity: 1;
+}
+.copy-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+.copy-button.copied {
+  background: rgba(0, 255, 0, 0.2);
+}

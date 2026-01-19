@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    {% if page.title %}<title>{{ page.title }}</title>{% endif %}
+    {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
+    {% if page.author %}<meta name="author" content="{{ page.author }}">{% endif %}
+
+    <meta name="mobile-web-app-capable" content="yes" />
+	  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    {% assign reveal_path = page.reveal_path | default: site.reveal_path %}
+    {% assign reveal_theme = page.reveal_theme | default: site.reveal_theme %}
+    <link rel="stylesheet" href="{{ reveal_path }}dist/reveal.css">
+	  <link rel="stylesheet" href="{{ reveal_theme }}" id="theme">
+
+    {% if page.extra_css %}
+      {% for css_file in page.extra_css %}
+        <link rel="stylesheet" href="{{ css_file }}">
+      {% endfor %}
+    {% endif %}
+
+    {% assign mermaid_diagrams = page.mermaid_diagrams | default: site.mermaid_diagrams %}
+    {% if mermaid_diagrams %}
+      <link rel="stylesheet" href="/assets/css/mermaid.css">
+    {% endif %}
+
+    <!-- For syntax highlighting -->
+    {% if page.highlight_style_sheet %}
+      {% assign highlight_style_sheet = page.highlight_style_sheet %}
+    {% else %}
+      {% capture highlight_style_sheet %}{{ reveal_path }}plugin/highlight/zenburn.css {% endcapture %}
+    {% endif %}
+    <link rel="stylesheet" href="{{ highlight_style_sheet }}">
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+      document.write( '<link rel="stylesheet" href="{{ reveal_path }}css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.scss" type="text/css" media="print">' );
+    </script>
+  </head>
+
+  <body>
+    {{ content }}
+  </body>
+</html>
