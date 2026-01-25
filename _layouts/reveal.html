@@ -35,7 +35,11 @@
     {% endif %}
     <link rel="stylesheet" href="{{ highlight_style_sheet }}">
 
-    <script src="/assets/js/notes-server/copy_button.js" defer></script>
+    {% if page.extra_scripts %}
+      {% for script_file in page.extra_scripts %}
+        <script src="{{ script_file }}" defer></script>
+      {% endfor %}
+    {% endif %}
 
     <!-- If the query includes 'print-pdf', use the PDF print sheet -->
     <script>
