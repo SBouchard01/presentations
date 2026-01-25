@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
+    <base href="{{ site.baseurl }}/">
+
     {% if page.title %}<title>{{ page.title }}</title>{% endif %}
     {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
     {% if page.author %}<meta name="author" content="{{ page.author }}">{% endif %}
@@ -24,7 +26,7 @@
 
     {% assign mermaid_diagrams = page.mermaid_diagrams | default: site.mermaid_diagrams %}
     {% if mermaid_diagrams %}
-      <link rel="stylesheet" href="/assets/css/mermaid.css">
+      <link rel="stylesheet" href="assets/css/mermaid.css">
     {% endif %}
 
     <!-- For syntax highlighting -->

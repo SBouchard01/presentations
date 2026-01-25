@@ -63,8 +63,8 @@ layout: reveal
 {% endcomment %}
 {% assign reveal_notes_server = page.reveal_notes_server | default: site.reveal_notes_server %}
 {% if reveal_notes_server %}
-<script src="/socket.io/socket.io.js"></script>
-<script src="/assets/js/notes-server/client.js"></script>
+<script src="socket.io/socket.io.js"></script>
+<script src="assets/js/notes-server/client.js"></script>
 {% endif %}
 
 {% for dependency in page.reveal_dependencies %}
