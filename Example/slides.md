@@ -65,7 +65,7 @@ def func(a):
 
 --
 
-> We add a git graph trough mermaid:
+> We add a git graph trough mermaid[$^1$](#/5/1):
 
 <mermaid>
 gitGraph
@@ -90,7 +90,7 @@ gitGraph
 
 --
 
-This is a table ! [$^3$](#/5)
+This is a table ! [$^2$](#/5/2)
 
 |                     | GitHub | GitLab |
 | ------------------- | ------ | ------ |
@@ -109,6 +109,23 @@ This is a table ! [$^3$](#/5)
 ---
 
 ## Footnotes
+
+
+1. `<code>` blocks are parsed in mermaid blocks if an empty line is added somewhere before it.
+
+<mermaid>
+flowchart TD
+    A[Start] --> B{<code>This is code without an empty line since the beginning of the graph</code>}
+    
+    B -- Yes --> C[<code>I added an empty line before this code</code>]
+    B -- No --> D[Check the code]
+    D --> B
+</mermaid>
+
+[Return to slide 3.](#/3/2)
+
+--
+
 1. This is a footnote example.
 
 [Return to slide 2.](#/4/2)
