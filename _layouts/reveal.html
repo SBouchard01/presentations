@@ -35,6 +35,12 @@
     {% endif %}
     <link rel="stylesheet" href="{{ highlight_style_sheet }}">
 
+    {% if page.extra_scripts %}
+      {% for script_file in page.extra_scripts %}
+        <script src="{{ script_file }}" defer></script>
+      {% endfor %}
+    {% endif %}
+
     <!-- If the query includes 'print-pdf', use the PDF print sheet -->
     <script>
       document.write( '<link rel="stylesheet" href="{{ reveal_path }}css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.scss" type="text/css" media="print">' );
